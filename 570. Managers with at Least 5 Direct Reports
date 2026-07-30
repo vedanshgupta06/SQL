@@ -1,0 +1,4 @@
+select e.name from Employee e
+inner join employee m on e.id = m.managerId
+group by e.name,e.id
+having count(*)>=5;
