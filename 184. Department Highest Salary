@@ -1,0 +1,10 @@
+select  Department,Employee,  Salary
+from (
+    SELECT d.name As Department,
+           e.name As Employee,
+           e.salary As Salary,
+    RANK() OVER(PARTITION BY e.DepartmentId ORDER BY e.salary desc)rnk
+    FROM employee e
+    INNER JOIN Department d on e.departmentid = d.id
+)t
+WHERE rnk =1;
