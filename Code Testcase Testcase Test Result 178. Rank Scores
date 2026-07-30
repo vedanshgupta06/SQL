@@ -1,0 +1,8 @@
+SELECT score AS score,t.rnk AS rank
+FROM(
+    SELECT *,
+    DENSE_RANK() OVER(ORDER BY score DESC)AS rnk
+    FROM Scores
+)t
+;
+
