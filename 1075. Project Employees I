@@ -1,0 +1,10 @@
+select project_id,
+       Round(
+        sum(experience_years)*1.0/
+        count(*),
+        2
+       )average_years
+from project p
+join employee e
+on p.employee_id = e.employee_id
+group by project_id;
