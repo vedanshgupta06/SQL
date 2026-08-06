@@ -1,0 +1,17 @@
+select machine_id,
+       Round(
+       (( select sum(
+            Case when activity_type = 'end' then timestamp
+            else 0
+            end
+        ) from activity x where x.machine_id = a.machine_id)-
+       ( select sum(
+            Case when activity_type = 'start' then timestamp
+            else 0
+            end
+        ) from activity x where x.machine_id = a.machine_id))::numeric/
+        (count(*)/2.0),
+        3
+       )as processing_time
+from activity a
+group by a.machine_id;       
